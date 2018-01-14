@@ -257,6 +257,7 @@ def nlp_everything():
 
     return response
 
+# extend https://github.com/explosion/spacy/blob/master/examples/information_extraction/entity_relations.py for all entities
 
 def extract_semantic_relations(doc):
     # merge entities and noun chunks into one token
