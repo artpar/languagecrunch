@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 
-docker build -t crunch  .
+docker build -t languagecrunch  .
