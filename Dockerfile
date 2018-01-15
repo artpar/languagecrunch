@@ -19,9 +19,9 @@ RUN ls -lah
 RUN ls -lah
 RUN ls -lah
 RUN unzip master.zip
-#WORKDIR /neuralcoref-master/
+WORKDIR /neuralcoref-master/
 RUN ls -lah
-#RUN python3.6 setup.py install
+RUN python3.6 setup.py install
 
 WORKDIR /
 ADD src /app
