@@ -1,24 +1,37 @@
 # LanguageCrunch NLP Service docker image
 
-- Sentence detection
-- Tokenization
+Docker image 
+https://hub.docker.com/r/artpar/languagecrunch/
 
 
 ## Sentiment
 
-`sentence: "RT @Slate: Donald Trump's administration: "Government by the worst men."",`
+`sentence: The new twitter is so weird. Seriously. Why is there a new twitter? What was wrong with the old one? Fix it now.`
 ```json
- sentiment: {
-   polarity: -1,
-   subjectivity: 1
- },
- .....  // removed for brevity
- entities: [
- {
-   text: "Donald Trump's administration",
-   label: "PERSON"
- }
-]
+{
+  "relations": [],
+  "sentences": [
+    {
+      "sentence": "The new twitter is so weird. ",
+      "sentence_type": "assertive",
+      "sentiment": {
+        "polarity": -0.18181818181818182,
+        "subjectivity": 0.7272727272727273
+      },
+      "root": {
+        "text": "is ",
+        "orth": 2
+      },
+      "pos": [
+        {
+          "text": "The new twitter",
+          "lemma": "the",
+          "pos": "DET",
+          "tag": "DT",
+          "dep": "nsubj",
+          .
+          .
+          .
 ```
 
 ## Entity extraction
@@ -42,6 +55,24 @@
 - ORDINAL
 - CARDINAL
 
+`Eg: Bill Gates, the founder of Microsoft, hosted a party last night`
+```json
+  "entities": [
+    {
+      "text": "Bill Gates",
+      "label": "PERSON"
+    },
+    {
+      "text": "Microsoft",
+      "label": "ORG"
+    },
+    {
+      "text": "last night",
+      "label": "TIME"
+    }
+  ]
+}
+```
 
 ## Sentence type detection
 - assertive
@@ -52,13 +83,15 @@
 ## Relation extraction
 
 
-`Eg: The currency of India is Rupees.`
+`Eg: Bill Gates, the founder of Microsoft, hosted a party last night`
 ```
-{
-   subject: "The currency",
-   object: "India",
-   relation: "GPE"
- }
+  "relations": [
+    {
+      "subject": "the founder",
+      "object": "Microsoft",
+      "relation": "ORG"
+    }
+  ],
 ```
 
 
@@ -90,18 +123,58 @@
 - Word frames ( how the word is used )
  
 - Coreference resolution
- - Pronouns/references to nouns
+- Pronouns/references to nouns
+
+
+`Eg: startle, verb` 
  
+```json
+  "results": [
+    {
+      "definition": "to stimulate to action",
+      "examples": [
+        "..startled him awake",
+        "galvanized into action"
+      ],
+      "lemma_names": [
+        "startle",
+        "galvanize",
+        "galvanise"
+      ],
+      "hypernyms": [
+        {
+          "definition": "surprise greatly; knock someone's socks off",
+          "examples": [
+            "I was floored when I heard that I was promoted"
+          ],
+          "lemma_names": [
+            "shock",
+            "floor",
+            "ball_over",
+            "blow_out_of_the_water",
+            "take_aback"
+          ]
+        }
+      ],
+      "lemmas": [
+        {
+          "frame_strings": [
+            "Somebody startle somebody",
+            "Something startle somebody",
+            "Somebody startle somebody into V-ing something"
+          ],
+```
  
 ## Endpoints
 
-- Sentence parse 
+## Sentence parse [Spacy]
 
   `GET http://localhost:8080/nlp/parse?sentence=<Sentences>`
-- Word lookup 
+
+## Word lookup [Wordnet]
 
   `GET http://localhost:8080/nlp/word?word=ask&pos=v`
 
-- Coreference resolution 
+## Coreference resolution [neuralcoref]
 
   `GET http://localhost:8080/nlp/coref?sentence=<Sentences>`
