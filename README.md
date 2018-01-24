@@ -1,10 +1,47 @@
 # LanguageCrunch NLP Service docker image
 
-Docker image 
-https://hub.docker.com/r/artpar/languagecrunch/
+Docker image: https://hub.docker.com/r/artpar/languagecrunch/
 
+- **[Quickstart](#quickstart)**
+- **[Endpoints](#endpoints)**
+- **[Model Details](#model-details)**
+  - [Sentiment](#sentiment)
+  - [Entity extraction](#entity-extraction)
+  - [Sentence type detection](#sentence-type-detection)
+  - [Relation extraction](#relation-extraction)
+  - [Word look up](#word-look-up)
 
-## Sentiment
+## Quickstart
+
+Pull and run the Docker image, listening on port 8080:
+
+```
+$ docker run -it -p 8080:8080 artpar/languagecrunch
+```
+
+Example API call:
+
+```bash
+$ curl http://localhost:8080/nlp/parse?`echo -n "The new twitter is so weird. Seriously. Why is there a new twitter? What was wrong with the old one? Fix it now." | python -c "import urllib, sys; print(urllib.urlencode({'sentence': sys.stdin.read()}))"`
+```
+
+## Endpoints
+
+### Sentence parse [Spacy]
+
+  `GET http://localhost:8080/nlp/parse?sentence=<URL-encoded sentences>`
+
+### Word lookup [Wordnet]
+
+  `GET http://localhost:8080/nlp/word?word=ask&pos=v`
+
+### Coreference resolution [neuralcoref]
+
+  `GET http://localhost:8080/nlp/coref?sentence=<URL-encoded sentences>`
+
+## Model Details
+
+### Sentiment
 
 `sentence: The new twitter is so weird. Seriously. Why is there a new twitter? What was wrong with the old one? Fix it now.`
 ```json
@@ -34,7 +71,7 @@ https://hub.docker.com/r/artpar/languagecrunch/
           .
 ```
 
-## Entity extraction
+### Entity extraction
 
 - PERSON
 - NORP
@@ -74,13 +111,14 @@ https://hub.docker.com/r/artpar/languagecrunch/
 }
 ```
 
-## Sentence type detection
+### Sentence type detection
+
 - assertive
 - interrogative
 - exclamatory
 - negative
 
-## Relation extraction
+### Relation extraction
 
 
 `Eg: Bill Gates, the founder of Microsoft, hosted a party last night`
@@ -111,8 +149,7 @@ https://hub.docker.com/r/artpar/languagecrunch/
 
 ```
 
-
-## Word look up
+### Word look up
 
 - Category of word 
   - Hypernyms - **colour** is a hypernym of **red**.
@@ -121,13 +158,13 @@ https://hub.docker.com/r/artpar/languagecrunch/
 - Synonyms to match
 - Examples
 - Word frames ( how the word is used )
- 
+
 - Coreference resolution
 - Pronouns/references to nouns
 
 
 `Eg: startle, verb` 
- 
+
 ```json
   "results": [
     {
@@ -164,17 +201,4 @@ https://hub.docker.com/r/artpar/languagecrunch/
             "Somebody startle somebody into V-ing something"
           ],
 ```
- 
-## Endpoints
 
-## Sentence parse [Spacy]
-
-  `GET http://localhost:8080/nlp/parse?sentence=<Sentences>`
-
-## Word lookup [Wordnet]
-
-  `GET http://localhost:8080/nlp/word?word=ask&pos=v`
-
-## Coreference resolution [neuralcoref]
-
-  `GET http://localhost:8080/nlp/coref?sentence=<Sentences>`
