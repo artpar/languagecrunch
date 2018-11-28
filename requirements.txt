@@ -21,7 +21,7 @@ plac==0.9.6
 preshed==1.0.0
 python-mimeparse==1.6.0
 regex==2017.4.5
-requests==2.18.1
+requests==2.20.0
 six==1.10.0
 termcolor==1.1.0
 thinc
