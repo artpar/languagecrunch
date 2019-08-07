@@ -24,7 +24,7 @@ regex==2017.4.5
 requests==2.20.0
 six==1.10.0
 termcolor==1.1.0
-thinc
+thinc==6.11.2
 toolz==0.8.2
 tqdm==4.14.0
 ujson==1.35
