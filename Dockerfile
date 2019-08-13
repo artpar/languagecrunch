@@ -4,7 +4,7 @@ FROM python:3.6
 RUN python3.6 -m pip install pip --upgrade
 RUN python3.6 -m pip install wheel
 ADD requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+RUN python3.6 -m pip install -r /app/requirements.txt
 RUN python3.6 -m nltk.downloader wordnet
 RUN python3.6 -m spacy download en_core_web_lg
 RUN python3.6 -m spacy download en_vectors_web_lg
