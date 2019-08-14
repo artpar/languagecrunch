@@ -15,9 +15,6 @@ RUN python3.6 -m spacy download en_core_web_sm
 RUN wget https://github.com/huggingface/neuralcoref/archive/master.zip -o neuralcoref.zip
 RUN apt-get update && apt-get install unzip
 RUN ls -lah
-RUN ls -lah
-RUN ls -lah
-RUN ls -lah
 RUN unzip master.zip
 WORKDIR /neuralcoref-master/
 RUN ls -lah
