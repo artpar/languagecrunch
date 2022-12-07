@@ -6,7 +6,7 @@ spacy
 nltk
 textblob
 keras==2.0.9
-certifi==2017.4.17
+certifi==2022.12.7
 chardet==3.0.4
 cytoolz==0.8.2
 dill==0.2.7
